@@ -9,6 +9,7 @@ import os
 def Main():
     ThisGame = Breakthrough()
     ThisGame.PlayGame()
+    print('beans')
 
 class Breakthrough():
     def __init__(self):
