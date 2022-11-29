@@ -48,6 +48,10 @@ class Breakthrough():
                             self.__GetCardFromDeck(CardChoice)
                         elif DiscardOrPlay == "P":
                             self.__PlayCardToSequence(CardChoice)
+                    elif MenuChoice == "P" and  not self.__CurrentLock.GetPeekState():
+                        next_cards = [self.__Deck.GetCardDescriptionAt(i) for i in [1,2,3]]
+                        print("next cards are",next_cards,"###################################")
+                        self.__CurrentLock.SetPeekUsed()
                     if self.__CurrentLock.GetLockSolved():
                         self.__LockSolved = True
                         self.__ProcessLockSolved()
@@ -78,7 +82,7 @@ class Breakthrough():
         else:
             self.__CreateStandardDeck()
             self.__Deck.Shuffle()
-            for Count in range(5):
+            for _ in range(5):
                 self.__MoveCard(self.__Deck, self.__Hand, self.__Deck.GetCardNumberAt(0))
             self.__AddDifficultyCardsToDeck()
             self.__Deck.Shuffle()
@@ -170,7 +174,7 @@ class Breakthrough():
                     LineFromFile = f.readline().rstrip()
         except:
             print("File not loaded")
-        
+
     def __GetRandomLock(self):
         return self.__Locks[random.randint(0, len(self.__Locks) - 1)]
 
@@ -213,9 +217,9 @@ class Breakthrough():
         if PeekState:
             Choice = input("(D)iscard inspect, (U)se card:> ").upper()
         else:
-            Choice = input("(D)iscard inspect, (U)se card:> ,(P)eek at next 3 cards in deck").upper()
+            Choice = input("(D)iscard inspect, (U)se card, (P)eek at next 3 cards in deck:>").upper()
         return Choice
-    
+
     def __AddDifficultyCardsToDeck(self):
         for Count in range(5):
             self.__Deck.AddCard(DifficultyCard())
@@ -241,7 +245,7 @@ class Breakthrough():
             self.__Deck.AddCard(NewCard)
             NewCard = ToolCard("K", "c")
             self.__Deck.AddCard(NewCard)
-    
+
     def __MoveCard(self, FromCollection, ToCollection, CardNumber):
         Score  = 0
         if FromCollection.GetName() == "HAND" and ToCollection.GetName() == "SEQUENCE":
