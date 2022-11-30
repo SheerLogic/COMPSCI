@@ -474,7 +474,7 @@ class CardCollection():
             self._Cards[RNo2] = TempCard
 
     def RemoveCard(self, CardNumber):
-        #CardToGet = None
+        #CardToGet = ''
         CardFound  = False
         Pos  = 0
         while Pos < len(self._Cards) and not CardFound:
