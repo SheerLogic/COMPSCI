@@ -48,10 +48,17 @@ class Breakthrough():
                             self.__GetCardFromDeck(CardChoice)
                         elif DiscardOrPlay == "P":
                             self.__PlayCardToSequence(CardChoice)
+                    #edit  
                     elif MenuChoice == "P" and  not self.__CurrentLock.GetPeekState():
-                        next_cards = [self.__Deck.GetCardDescriptionAt(i) for i in [1,2,3]]
-                        print("next cards are",next_cards,"###################################")
+                        next_cards = [self.__Deck.GetCardDescriptionAt(i) for i in [0,1,2]]
+                        print("next cards are",next_cards)
                         self.__CurrentLock.SetPeekUsed()
+                    elif MenuChoice == "Q":
+                        self.__GameOver = True
+                        self.__Score += self.__Deck.GetNumberOfCards()
+                        print("Your final score is:", self.__Score)
+                        exit()
+                    #edit
                     if self.__CurrentLock.GetLockSolved():
                         self.__LockSolved = True
                         self.__ProcessLockSolved()
@@ -215,9 +222,9 @@ class Breakthrough():
     def __GetChoice(self,PeekState):
         print()
         if PeekState:
-            Choice = input("(D)iscard inspect, (U)se card:> ").upper()
+            Choice = input("(D)iscard inspect, (U)se card, (Q)uit:> ").upper()
         else:
-            Choice = input("(D)iscard inspect, (U)se card, (P)eek at next 3 cards in deck:>").upper()
+            Choice = input("(D)iscard inspect, (U)se card, (Q)uit, (P)eek at next 3 cards in deck:>").upper()
         return Choice
 
     def __AddDifficultyCardsToDeck(self):
@@ -445,6 +452,7 @@ class CardCollection():
             self._Cards[RNo2] = TempCard
 
     def RemoveCard(self, CardNumber):
+        CardToGet = None
         CardFound  = False
         Pos  = 0
         while Pos < len(self._Cards) and not CardFound:
