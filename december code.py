@@ -205,7 +205,10 @@ class Breakthrough():
                 self.__MoveCard(self.__Deck, self.__Hand, self.__Deck.GetCardNumberAt(0))
         if self.__Deck.GetNumberOfCards() == 0 and self.__Hand.GetNumberOfCards() < 5:
             self.__GameOver = True
-
+#edit
+    def __DisplayStats(self):
+        #calculate the % chance that the next card tile in the deck 
+#edit
     def __GetCardChoice(self):
         Choice = None
         while Choice is None:
