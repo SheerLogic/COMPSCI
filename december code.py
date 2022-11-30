@@ -207,7 +207,8 @@ class Breakthrough():
             self.__GameOver = True
 #edit
     def __DisplayStats(self):
-        #calculate the % chance that the next card tile in the deck 
+        #calculate the % chance that the next card tile in the deck
+        pass
 #edit
     def __GetCardChoice(self):
         Choice = None
