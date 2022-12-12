@@ -1,3 +1,4 @@
+import json
 import math
 #class of given cone
 class Cone():
@@ -121,16 +122,27 @@ Sabrina = Walker()
 #and cone1 and cone2 are in the same list of cones
 def create_dictionary_of_cones():
     dictionary_of_cones = {}
+    dict_edward = {}
+    for i in range(len(List_of_cones)):
+        dict_edward[str(i)] = {}
+        for j in range(len(List_of_cones)):
+            dict_edward[str(i)][str(j)] = Sabrina.time_between_cones(List_of_cones[i],List_of_cones[j])
+
     for cone in List_of_cones:
         dictionary_of_cones[cone] = {}
         for cone2 in Array_of_cones[cone]:
             dictionary_of_cones[cone][cone2] = Sabrina.time_between_cones(cone,cone2)
-    return dictionary_of_cones
+    return dictionary_of_cones, dict_edward
 
-dict_of_cones = create_dictionary_of_cones()
 
-print(dict_of_cones[List_of_cones[59]][List_of_cones[55]])
 
+dict_of_cones,graph = create_dictionary_of_cones()
+
+#print(dict_of_cones[List_of_cones[59]][List_of_cones[55]])
+#save graph as json file
+with open('graph.json', 'w') as fp:
+    json.dump(graph, fp)
+    
 
 
 #plot points of cones in geogebra to find cones in other cones
