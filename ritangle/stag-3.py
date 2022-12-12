@@ -116,20 +116,6 @@ print(len(Array_of_cones[List_of_cones[56]]))
 
 Sabrina = Walker()
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 #create dictionary in form {cone1: {cone2: time, cone3: time, ...}, cone4: {cone5: time, cone6: time, ...}, ...}
 #where time is time taken to go from tip of cone1 down until either ground level or slope of cone2 is reached, then up slope of cone2 to tip of cone2
 #and cone1 and cone2 are in the same list of cones
