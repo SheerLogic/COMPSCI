@@ -192,6 +192,9 @@ class Breakthrough():
                 print()
                 print("Difficulty encountered!")
                 print(self.__Hand.GetCardDisplay())
+                #edit
+                print(self.__Deck.DisplayStats())
+                #edit
                 print("To deal with this you need to either lose a key ", end='')
                 Choice = input("(enter 1-5 to specify position of key) or (D)iscard five cards from the deck:> ")
                 print()
@@ -205,10 +208,7 @@ class Breakthrough():
                 self.__MoveCard(self.__Deck, self.__Hand, self.__Deck.GetCardNumberAt(0))
         if self.__Deck.GetNumberOfCards() == 0 and self.__Hand.GetNumberOfCards() < 5:
             self.__GameOver = True
-#edit
-    def __DisplayStats(self):
-        #calculate the % chance that the next card tile in the deck 
-#edit
+
     def __GetCardChoice(self):
         Choice = None
         while Choice is None:
@@ -430,7 +430,26 @@ class CardCollection():
     def __init__(self, N):
         self._Name = N
         self._Cards = []
+        #edit
+        self.stats = {"P":0, "F":0, "K":0}
+        #edit
+    #edit
+    def UpdateStats(self, deck):
+        self.stats = {"P":0, "F":0, "K":0}
+        #should be fine as long as card.getdescription returns correct values
+        for card in deck:
+            self.stats[card.GetDescription()[0]] += 1
+    #edit
 
+    #edit
+    def DisplayStats(self):
+        #calculate and return % chance of each tool type, rounded to 2dp
+        P = round(100*self.stats["P"]/len(self._Cards),2)
+        F = round(100*self.stats["F"]/len(self._Cards),2)
+        K = round(100*self.stats["K"]/len(self._Cards),2)
+        return f"there is a {K}% chance that the next card will be a key, a {F}% chance that it will be a file, and a {P}% chance that it will be a pick"
+    #edit
+            
     def GetName(self):
         return self._Name
 
@@ -455,7 +474,7 @@ class CardCollection():
             self._Cards[RNo2] = TempCard
 
     def RemoveCard(self, CardNumber):
-        #CardToGet = None
+        #CardToGet = ''
         CardFound  = False
         Pos  = 0
         while Pos < len(self._Cards) and not CardFound:
